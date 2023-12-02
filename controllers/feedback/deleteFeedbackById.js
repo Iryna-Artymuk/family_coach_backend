@@ -1,8 +1,21 @@
 import asyncHandler from '../../decorators/acyncHandler.js';
+import Feedback from '../../models/Feedback.js';
 
 const deleteFeedbackById = async (req, res) => {
-  const { feedbackId } = req.params;
-  res.json({ data: ` feedback  with  id${feedbackId} deleted ` });
+  const { id } = req.params;
+
+  const result = await Feedback.findByIdAndDelete(id);
+
+  if (!result) {
+    throw HttpError(
+      404,
+      `відгуку  з id:${id} не знайдено перевірте чи правильний id `
+    );
+  }
+
+  res.json({
+    message: ` Feedback with id:${id} deleted successfully`,
+  });
 };
 
 export default asyncHandler(deleteFeedbackById);

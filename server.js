@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import colors from 'colors';
 const configPath = path.resolve('./', 'config', '.env');
-console.log('configPath: ', configPath);
+
 dotenv.config({ path: configPath }); // додає змінні з файлу env який знаходиться в папці config  до глобального обєкту process.env
 import connectDB from './config/connectDB.js';
 const { PORT, DB_HOST } = process.env;

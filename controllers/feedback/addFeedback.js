@@ -1,7 +1,10 @@
 import asyncHandler from '../../decorators/acyncHandler.js';
+import Feedback from '../../models/Feedback.js';
 
 const addFeedback = async (req, res) => {
-  res.json({ data: `feedback:${req.body.feedback}` });
+  const result = await Feedback.create(req.body);
+
+  res.status(201).json(result);
 };
 
 export default asyncHandler(addFeedback);

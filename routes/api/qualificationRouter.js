@@ -1,36 +1,26 @@
 import express from 'express';
 
-import getAlldiplomas from '../../controllers/qualification/getAlldiplomas.js';
+import {
+  getAlldiplomas,
+  deleteDiplomaById,
+  addDiplomas,
+} from '../../controllers/qualification/index.js';
+import isValidId from '../../middlewars/isValidId.js';
+import vadidateQualificationBody from '../../middlewars/validation/qualificationBodyValidation.js';
+import upload from '../../middlewars/upload.js';
 
 const qualificationRouter = express.Router(); // create router
 
 qualificationRouter.get('/', getAlldiplomas);
-//router.get('/', authentication, getAllFeedbacks);
 
-// router.get('/:contactId', authentication, isValidId, getContactById);
+qualificationRouter.post(
+  '/',
 
-// router.post('/', authentication, vadidateAddContact, addContact);
+  upload.single('diplomaImg'),
 
-// router.put(
-//   '/:contactId',
-//   authentication,
-//   isValidId,
-//   vadidateAddContact,
-//   updateContactById
-// );
-// router.patch(
-//   '/:contactId/favorite',
-//   isValidId,
-//   vadidateFavorite,
-//   updateContactById
-// );
-// router.patch(
-//   '/:contactId/avatars',
-//   isValidId,
-//   vadidateFavorite,
-//   updateContactById
-// );
+  addDiplomas
+);
 
-// router.delete('/:contactId', authentication, isValidId, deleteContactById);
+qualificationRouter.delete('/:id', isValidId, deleteDiplomaById);
 
 export default qualificationRouter;

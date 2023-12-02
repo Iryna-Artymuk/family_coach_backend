@@ -4,26 +4,28 @@ import {
   getAllFeedbacks,
   addFeedback,
   updateFeedbackById,
+  deleteFeedbackById,
 } from '../../controllers/feedback/index.js';
-import deleteFeedbackById from '../../controllers/feedback/deleteFeedbackById.js';
 
 import vadidateFeedback from '../../middlewars/validation/feedbackBodyValidation.js';
+import isValidId from '../../middlewars/isValidId.js';
 
 const feedbackRouter = express.Router(); // create router
 
 feedbackRouter.get('/', getAllFeedbacks);
 //router.get('/', authentication, getAllFeedbacks);
 
-feedbackRouter.get('/:feedbackId', getFeedbackById);
+feedbackRouter.get('/:id', isValidId, getFeedbackById);
 
 feedbackRouter.post('/', vadidateFeedback.vadidateFeedbackBody, addFeedback);
 
 feedbackRouter.patch(
-  '/:feedbackId/status',
+  '/:id/status',
+  isValidId,
   vadidateFeedback.vadidateFeeedbackStatus,
   updateFeedbackById
 );
 
-feedbackRouter.delete('/:feedbackId', deleteFeedbackById);
+feedbackRouter.delete('/:id', isValidId, deleteFeedbackById);
 
 export default feedbackRouter;
