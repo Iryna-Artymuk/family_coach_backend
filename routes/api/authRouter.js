@@ -14,7 +14,7 @@ import express from 'express';
 //   validateLoginUser,
 //   authentication,
 //   vadidateSubscription,
-//   upload,
+
 //   validateEmail,
 // } from '../../middlewars/index.js';
 
@@ -24,13 +24,8 @@ const authRouter = express.Router(); // create router
 // authRouter.post('/users/login', validateLoginUser, userLogin);
 // authRouter.delete('/users/logout', authentication, userLogout);
 
-// authRouter.patch('/users', authentication, vadidateSubscription, updateUser);
-// authRouter.patch(
-//   '/users/avatars',
-//   authentication,
-//   upload.single('avatar'),
-//   updateAvatar
-// );
+// authRouter.patch('/users', authentication,  updateUser);
+// authRouter.patch('/users/password', authentication,  updateUser);
 
 // authRouter.get('/users/current', authentication, getCurrentUser);
 

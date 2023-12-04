@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.resolve('public', 'images')));
 // console.log(path.resolve('public', 'images'));
 app.use('/api/feedbacks', feedbackRouter);
-// app.use('/api/blog', blogRouter);
+app.use('/api/blog', blogRouter);
 // app.use('/api/price', priceRouter);
 app.use('/api/qualification', qualificationRouter);
 // app.use('/api/auth', authRouter);

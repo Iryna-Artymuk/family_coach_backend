@@ -1,19 +1,19 @@
 import asyncHandler from '../../decorators/acyncHandler.js';
+import Blog from '../../models/Blog.js';
 
 const getAllBlogPosts = async (req, res) => {
-  //   const { _id: owner } = req.user;
-  //   console.log('owner : ', owner);
+  // const { _id: author } = req.user;
 
-  //   const { page = 1, limit = 10, favorite = true } = req.query; // деструктуризуємо параметри пошуку з фронтенду
-  //   // додаємо ці параметри до запиту до БД
-  //   const skip = (page - 1) * limit; // скільки обєктів пропустити з початку бази
+  const { page = 1, limit = 10 } = req.query; // деструктуризуємо параметри пошуку з фронтенду
+  // додаємо ці параметри до запиту до БД
+  const skip = (page - 1) * limit; // скільки обєктів пропустити з початку бази
 
-  //   const result = await Contact.find({ owner, favorite }, null, {
-  //     skip,
-  //     limit,
-  //   }).populate('owner');
-  //res.json({ quantity: feedbackData.length, data: feedbackData });
-  res.json({ data: 'blog data ' });
+  const result = await Blog.find({}, null, {
+    skip,
+    limit,
+  });
+  // .populate( 'author' );
+  res.json({ quantity: result.length, data: result });
 };
 
 export default asyncHandler(getAllBlogPosts);

@@ -6,25 +6,50 @@ import HttpError from '../helpers/httpError.js';
 const destinationPath = path.resolve('temp'); // path to  tempFiles folder from  project root where to save file before controller function
 
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    const array_of_allowed_files = ['png', 'jpeg', 'jpg', 'gif', 'JPG'];
+  // destination: function (req, file, cb) {
 
-    // Get the extension of the uploaded file
-    const file_extension = file.originalname.slice(
-      ((file.originalname.lastIndexOf('.') - 1) >>> 0) + 2
-    );
-    if (!array_of_allowed_files.includes(file_extension)) {
-      return cb(HttpError(400, `Invalid file`), null);
-    } else cb(null, destinationPath);
-  },
-
+  destination: destinationPath,
   filename: function (req, file, cb) {
     // creat uniqe file name
     const uniquePrefix = `${Date.now()}_${Math.round(Math.random() * 1e9)}`;
     cb(null, `${uniquePrefix}${file.originalname}`);
   },
 });
+const upload = multer({
+  storage,
+  limits: {
+    // fieldNameSize: 300,
+    fileSize: 1024 * 1024 * 2, //2 Mb
+  },
+  fileFilter: (req, file, callback) => {
+    const acceptableExtensions = ['.png', '.jpeg', '.jpg', '.JPG'];
+    if (!acceptableExtensions.includes(path.extname(file.originalname))) {
+      return callback(
+        HttpError(
+          400,
+          `${path.extname(
+            file.originalname
+          )} is invalid file extention allowed  files format .png', .jpeg, .jpg,  .JPG`
+        )
+      );
+    }
 
-const upload = multer({ storage });
+    // added this
+    const fileSize = parseInt(req.headers['content-length']);
+    if (fileSize > 1024 * 1024 * 2) {
+      return callback(
+        HttpError(
+          400,
+          `Invalid file size, file ${(fileSize / 1048576).toFixed(
+            2
+          )} Mb is too big, max size 2Mb`
+        )
+      );
+    }
+    // --
+
+    callback(null, true);
+  },
+});
 
 export default upload;

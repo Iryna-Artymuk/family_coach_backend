@@ -1,35 +1,52 @@
 import express from 'express';
+import upload from '../../middlewars/upload.js';
+import isValidId from '../../middlewars/isValidId.js';
+import {
+  getAllBlogPosts,
+  getPostById,
+  addPost,
+  updatePostById,
+  deletePostById,
+  updatePostImageById,
+} from '../../controllers/blog/index.js';
+import vadidatePostBody from '../../middlewars/validation/postBodyValidation.js';
 
-import getAllBlogPosts from '../../controllers/blog/getAllBlogPost.js';
 const blogRouter = express.Router(); // create router
 
 blogRouter.get('/', getAllBlogPosts);
-//router.get('/', authentication, getAllFeedbacks);
 
-// router.get('/:contactId', authentication, isValidId, getContactById);
+blogRouter.get('/:id', isValidId, getPostById);
 
-// router.post('/', authentication, vadidateAddContact, addContact);
+blogRouter.post(
+  '/',
+  //   authentication,
+  upload.single('postImage'),
+  vadidatePostBody,
+  addPost
+);
 
-// router.put(
-//   '/:contactId',
-//   authentication,
-//   isValidId,
-//   vadidateAddContact,
-//   updateContactById
-// );
-// router.patch(
-//   '/:contactId/favorite',
-//   isValidId,
-//   vadidateFavorite,
-//   updateContactById
-// );
-// router.patch(
-//   '/:contactId/avatars',
-//   isValidId,
-//   vadidateFavorite,
-//   updateContactById
-// );
+blogRouter.put(
+  '/:id',
+  //authentication,
+  isValidId,
 
-// router.delete('/:contactId', authentication, isValidId, deleteContactById);
+  vadidatePostBody,
+  updatePostById
+);
+blogRouter.patch(
+  '/postImage/:id',
+  //authentication,
+  isValidId,
+  upload.single('postImage'),
+  //vadidatePostBody,
+  updatePostImageById
+);
+
+blogRouter.delete(
+  '/:id',
+  // authentication,
+  isValidId,
+  deletePostById
+);
 
 export default blogRouter;

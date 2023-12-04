@@ -17,7 +17,7 @@ qualificationRouter.post(
   '/',
 
   upload.single('diplomaImg'),
-
+  vadidateQualificationBody,
   addDiplomas
 );
 
