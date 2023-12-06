@@ -1,35 +1,60 @@
 import express from 'express';
-import getAllprice from '../../controllers/price/getAllprice.js';
+
+import {
+  getAdultPrice,
+  getKidsPrice,
+  updateKidsPrice,
+  updateAdultPrice,
+  getLecturePrice,
+  updateLecturePrice,
+} from '../../controllers/price/index.js';
+import isValidId from '../../middlewars/isValidId.js';
 
 const priceRouter = express.Router(); // create router
 
-priceRouter.get('/', getAllprice);
-//router.get('/', authentication, getAllFeedbacks);
+priceRouter.get(
+  '/kidsPrice',
 
-// router.get('/:contactId', authentication, isValidId, getContactById);
+  getKidsPrice
+);
+priceRouter.get(
+  '/adultPrice',
 
-// router.post('/', authentication, vadidateAddContact, addContact);
+  getAdultPrice
+);
+priceRouter.get('/lecturePrice', getLecturePrice);
 
-// router.put(
-//   '/:contactId',
-//   authentication,
+// priceRouter.get('/:contactId', authentication, isValidId, getContactById);
+
+// priceRouter.post('/', authentication, vadidateAddContact, addContact);
+
+// priceRouter.put(
+//   '/kidsPrice/:id',
+//   //   authentication,
 //   isValidId,
-//   vadidateAddContact,
-//   updateContactById
+//   //   vadidateAddContact,
+//   updateKidsPrice
 // );
-// router.patch(
-//   '/:contactId/favorite',
-//   isValidId,
-//   vadidateFavorite,
-//   updateContactById
-// );
-// router.patch(
-//   '/:contactId/avatars',
-//   isValidId,
-//   vadidateFavorite,
-//   updateContactById
-// );
-
-// router.delete('/:contactId', authentication, isValidId, deleteContactById);
+priceRouter.put(
+  '/adultPrice/:id',
+  //   authentication,
+  isValidId,
+  //   vadidateAddContact,
+  updateAdultPrice
+);
+priceRouter.put(
+  '/kidsPrice/:id',
+  //   authentication,
+  isValidId,
+  //   vadidateAddContact,
+  updateKidsPrice
+);
+priceRouter.put(
+  '/lecturePrice/:id',
+  //   authentication,
+  isValidId,
+  //   vadidateAddContact,
+  updateLecturePrice
+);
 
 export default priceRouter;
