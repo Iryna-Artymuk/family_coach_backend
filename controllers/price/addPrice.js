@@ -1,13 +1,10 @@
 import asyncHandler from '../../decorators/acyncHandler.js';
-import KidsPrice from '../../models/KidsPrice.js';
 import Price from '../../models/Price.js';
 
 const addPrice = async (req, res) => {
-  const kidsPrice = await KidsPrice.find({});
+  const result = await Price.create({ ...req.body });
 
-  const result = await Price.create({
-    kidsPrice: kidsPrice,
-  });
+  console.log('result: ', result);
 
   res.json({ data: result });
 };

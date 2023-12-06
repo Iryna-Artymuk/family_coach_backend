@@ -7,11 +7,15 @@ import {
   updateAdultPrice,
   getLecturePrice,
   updateLecturePrice,
+  getPrice,
 } from '../../controllers/price/index.js';
 import isValidId from '../../middlewars/isValidId.js';
+import addPrice from '../../controllers/price/addPrice.js';
 
 const priceRouter = express.Router(); // create router
 
+priceRouter.get('/', getPrice);
+priceRouter.post('/addPrice', addPrice);
 priceRouter.get(
   '/kidsPrice',
 

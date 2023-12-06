@@ -2,7 +2,6 @@
 import { Schema, model } from 'mongoose';
 import { handelSchemsErrorStatus } from './hooks.js';
 
-
 const kidsPriceSchema = new Schema(
   {
     type: {
@@ -44,9 +43,7 @@ const kidsPriceSchema = new Schema(
   { versionKey: false, timestamps: true }
 );
 
-
-
-kidsPriceSchema.post('save', handelSchemsErrorStatus);
+//kidsPriceSchema.post('save', handelSchemsErrorStatus);
 const KidsPrice = model('kids_price', kidsPriceSchema);
 
 export default KidsPrice;

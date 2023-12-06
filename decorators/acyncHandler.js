@@ -3,6 +3,7 @@ const asyncHandler = ctrl => {
     try {
       await ctrl(req, res, next);
     } catch (error) {
+      
       // викликаємо функцію обробки помилок
       next(error);
     }
