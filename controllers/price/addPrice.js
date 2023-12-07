@@ -1,20 +1,21 @@
 import asyncHandler from '../../decorators/acyncHandler.js';
+import HttpError from '../../helpers/httpError.js';
 import Price from '../../models/Price.js';
 
-const addPrice = async (req, res) => {
+const addPrice = async (req, res, next) => {
   // Get the new object from the request body
   const newPrice = req.body;
 
-  // Validate the new object
+  // Validate the new object will move to middlware joi validatio
 
   if (!newPrice.category) {
+    HttpError(400, 'Invalid category');
     return res.status(400).json({ message: 'Invalid category' });
   }
+  const price = await Price.findOne();
 
   // Find the price document to update
   // You can use your own query logic here
-  const price = await Price.findOne();
-
   switch (newPrice.category) {
     case 'Дорослі':
       (async function () {
@@ -50,7 +51,11 @@ const addPrice = async (req, res) => {
         } else {
           price.kidsPrices.push(newPrice);
           // Save the updated document
-          await price.save();
+          try {
+            await price.save();
+          } catch (error) {
+            return next(error);
+          }
 
           // Send a success response
           res.status(201).json({
@@ -63,14 +68,13 @@ const addPrice = async (req, res) => {
     case 'Лекції':
       (async function () {
         const dublicate = price.lecturePrices.find(
-          price => price.theme === newPrice.theme
+          price =>
+            price.theme === newPrice.theme && price.type === newPrice.type
         );
         if (dublicate) {
-          return res
-            .status(409)
-            .json({
-              message: ` ${newPrice.theme} already exixt in DB`,
-            });
+          return res.status(409).json({
+            message: ` ${newPrice.theme} already exixt in DB`,
+          });
         } else {
           price.lecturePrices.push(newPrice);
           // Save the updated document

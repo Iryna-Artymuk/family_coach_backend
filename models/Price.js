@@ -5,6 +5,7 @@ import { handelSchemsErrorStatus } from './hooks.js';
 const kidsSchema = new Schema({
   category: {
     type: String,
+    enum: ['Дорослі', 'Діти', 'Лекції'],
     required: [true, ' forgot to add category '],
   },
   type: {
@@ -46,7 +47,8 @@ const kidsSchema = new Schema({
 const adultSchema = new Schema({
   category: {
     type: String,
-    // required: [true, ' forgot to add category '],
+    enum: ['Дорослі', 'Діти', 'Лекції'],
+    required: [true, ' forgot to add category '],
   },
   type: {
     type: String,
@@ -71,6 +73,11 @@ const adultSchema = new Schema({
   },
 });
 const lectureSchema = new Schema({
+  category: {
+    type: String,
+    enum: ['Дорослі', 'Діти', 'Лекції'],
+    required: [true, ' forgot to add category '],
+  },
   type: {
     type: String,
     required: [true, ' forgot to add    type '],
@@ -94,7 +101,11 @@ const priceSchema = new Schema(
   },
   { versionKey: false, timestamps: true }
 );
+
 priceSchema.post('save', handelSchemsErrorStatus);
+
+// lectureSchema.post('save', handelSchemsErrorStatus);
+
 const Price = model('price', priceSchema);
 
 export default Price;

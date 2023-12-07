@@ -79,10 +79,9 @@ const deletePrice = async (req, res) => {
           });
         } else {
           // HttpError(400, `item with id: ${id} not exist in DB`);
-           res.status(400).json({
-             message: `item with id: ${id} not exist in DB`,
-           });
-         
+          res.status(400).json({
+            message: `item with id: ${id} not exist in DB`,
+          });
         }
       })();
       break;
