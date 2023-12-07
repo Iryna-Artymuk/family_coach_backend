@@ -2,21 +2,99 @@
 import { Schema, model } from 'mongoose';
 import { handelSchemsErrorStatus } from './hooks.js';
 
-const priceSchema = new Schema(
-  {
+const kidsSchema = new Schema({
+  category: {
+    type: String,
+    required: [true, ' forgot to add category '],
+  },
+  type: {
+    type: String,
+    required: [true, ' forgot to add    type '],
+  },
+  amount: {
+    type: String,
+    required: [true, ' forgot to add   amount'],
+  },
+  duration: {
+    type: String,
+    required: [true, ' forgot to add   duration '],
+  },
+
+  period: {
+    type: String,
+    default: null, // значення має відповідати одному з значкнь з масиву
+  },
+  price: {
+    type: String,
+    required: [true, ' forgot to add price'],
+  },
+  singleConsultation: {
     type: {
       type: String,
-      required: [true, ' forgot to add type '],
+      required: [true, ' forgot to add    type '],
     },
-    kids: [{ type: Schema.Types.ObjectId, ref: 'kids_price' }],
+    duration: {
+      type: String,
+      required: [true, ' forgot to add   duration '],
+    },
+    price: {
+      type: String,
+      required: [true, ' forgot to add price'],
+    },
+  },
+});
+const adultSchema = new Schema({
+  category: {
+    type: String,
+    // required: [true, ' forgot to add category '],
+  },
+  type: {
+    type: String,
+    required: [true, ' forgot to add  type '],
+  },
+  amount: {
+    type: String,
+    required: [true, ' forgot to add amount'],
+  },
+  duration: {
+    type: String,
+    required: [true, ' forgot to add   duration '],
+  },
 
-   adult: [{ type: Schema.Types.ObjectId, ref: 'adult_price' }],
-  
+  period: {
+    type: String,
+    default: null,
+  },
+  price: {
+    type: String,
+    required: [true, ' forgot to add `strictPopulate price'],
+  },
+});
+const lectureSchema = new Schema({
+  type: {
+    type: String,
+    required: [true, ' forgot to add    type '],
+  },
+  theme: {
+    type: String,
+    required: [true, ' forgot to add   theme'],
+  },
+
+  price: {
+    type: String,
+    required: [true, ' forgot to add     price'],
+  },
+});
+
+const priceSchema = new Schema(
+  {
+    adultPrices: [adultSchema],
+    kidsPrices: [kidsSchema],
+    lecturePrices: [lectureSchema],
   },
   { versionKey: false, timestamps: true }
 );
-
-
+priceSchema.post('save', handelSchemsErrorStatus);
 const Price = model('price', priceSchema);
 
 export default Price;
