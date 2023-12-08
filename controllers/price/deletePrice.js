@@ -1,16 +1,9 @@
 import asyncHandler from '../../decorators/acyncHandler.js';
-import HttpError from '../../helpers/httpError.js';
 import Price from '../../models/Price.js';
 
-const deletePrice = async (req, res) => {
-  const { category, id } = req.body;
-
-  // Validate the new object will move to middelware
-  if (!category) {
-    return res.status(400).json({ message: 'Invalid category' });
-  }
-
-  // Find the price document to update
+const deletePrice = async (req, res, next) => {
+  const { category } = req.body;
+  const { id } = req.params;
   const price = await Price.findOne();
 
   switch (category) {
@@ -20,7 +13,7 @@ const deletePrice = async (req, res) => {
 
         if (priceToDelete) {
           const index = price.adultPrices.indexOf(priceToDelete);
-          console.log('index: ', index);
+
           price.adultPrices.splice(index, 1);
           // Save the updated document
           await price.save();

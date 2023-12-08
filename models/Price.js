@@ -10,15 +10,15 @@ const kidsSchema = new Schema({
   },
   type: {
     type: String,
-    required: [true, ' forgot to add    type '],
+    required: [true, ' forgot to add  type '],
   },
   amount: {
     type: String,
-    required: [true, ' forgot to add   amount'],
+    required: [true, ' forgot to add amount'],
   },
   duration: {
     type: String,
-    required: [true, ' forgot to add   duration '],
+    required: [true, ' forgot to add duration '],
   },
 
   period: {
@@ -69,7 +69,7 @@ const adultSchema = new Schema({
   },
   price: {
     type: String,
-    required: [true, ' forgot to add `strictPopulate price'],
+    required: [true, ' forgot to add  price'],
   },
 });
 const lectureSchema = new Schema({

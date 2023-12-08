@@ -1,6 +1,5 @@
 import express from 'express';
-import upload from '../../middlewars/upload.js';
-import isValidId from '../../middlewars/isValidId.js';
+
 import {
   getAllBlogPosts,
   getPostById,
@@ -9,7 +8,7 @@ import {
   deletePostById,
   updatePostImageById,
 } from '../../controllers/blog/index.js';
-import vadidatePostBody from '../../middlewars/validation/postBodyValidation.js';
+import { isValidId, upload, vadidatePostBody } from '../../middlewars/index.js';
 
 const blogRouter = express.Router(); // create router
 

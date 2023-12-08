@@ -6,14 +6,26 @@ import {
   deletePrice,
   updatePrice,
 } from '../../controllers/price/index.js';
-import isValidId from '../../middlewars/isValidId.js';
-//import addPrice from '../../controllers/price/addPrice.js';
+
+import {
+  categoryValidation,
+  isValidId,
+  priceBodyValidation,
+} from '../../middlewars/index.js';
 
 const priceRouter = express.Router(); // create router
 
 priceRouter.get('/', getAllPrices);
-priceRouter.post('/', addPrice);
-priceRouter.delete('/', deletePrice);
-priceRouter.put('/', updatePrice);
+priceRouter.post('/', categoryValidation, priceBodyValidation, addPrice);
+
+priceRouter.put(
+  '/:id',
+  categoryValidation,
+  isValidId,
+  priceBodyValidation,
+  updatePrice
+);
+
+priceRouter.delete('/:id', categoryValidation, isValidId, deletePrice);
 
 export default priceRouter;

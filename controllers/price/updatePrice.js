@@ -3,20 +3,12 @@ import Price from '../../models/Price.js';
 
 const updatePrice = async (req, res, next) => {
   // Get the new object from the request body
-
+  const { id } = req.params;
   const updatePrice = { ...req.body };
-  const { id } = req.body;
-
-  // Validate the new object will move to middlware joi validation
-  if (!updatePrice.category) {
-    return res.status(400).json({ message: 'Invalid category' });
-  }
 
   // Find the price document to update
   // You can use your own query logic here
   const price = await Price.findOne();
-  console.log('updatePrice.category: ', updatePrice.category);
-
   switch (updatePrice.category) {
     case 'Дорослі':
       (async function () {
@@ -26,7 +18,12 @@ const updatePrice = async (req, res, next) => {
           const index = price.adultPrices.indexOf(priceToUpdate);
           price.adultPrices.splice(index, 1, updatePrice);
           // Save the updated document
-          await price.save();
+          // try catch catching mongoose schema validation
+          try {
+            await price.save();
+          } catch (error) {
+            return next(error);
+          }
 
           // Send a success response
           res.status(200).json({
@@ -35,7 +32,7 @@ const updatePrice = async (req, res, next) => {
         } else {
           //HttpError(400, `  item with id: ${id} not exist in DB`);
           res.status(400).json({
-            message: `item with id: ${id} not exist in DB`,
+            message: `item with id: ${id} not exist in  adultPrices DB`,
           });
         }
       })();
@@ -48,15 +45,19 @@ const updatePrice = async (req, res, next) => {
           const index = price.kidsPrices.indexOf(priceToUpdate);
           price.kidsPrices.splice(index, 1, updatePrice);
           // Save the updated document
-          await price.save();
+          // try catch catching mongoose schema validation on save
+          try {
+            await price.save();
+          } catch (error) {
+            return next(error);
+          }
           // Send a success response
           res.status(200).json({
             message: ` ${priceToUpdate.type} updated successfully`,
           });
         } else {
-          //HttpError(400, `  item with id: ${id} not exist in DB`);
           res.status(400).json({
-            message: `item with id: ${id} not exist in DB`,
+            message: `item with id: ${id} not exist in  kidsPrices DB`,
           });
         }
       })();
@@ -67,7 +68,6 @@ const updatePrice = async (req, res, next) => {
         const priceToUpdate = price.lecturePrices.find(
           price => price.id === id
         );
-        console.log('priceToUpdate : ', priceToUpdate);
 
         if (priceToUpdate) {
           const index = price.lecturePrices.indexOf(priceToUpdate);
@@ -75,7 +75,12 @@ const updatePrice = async (req, res, next) => {
           price.lecturePrices.splice(index, 1, updatePrice);
 
           // Save the updated document
-          await price.save();
+          // try catch catching mongoose schema validation on save
+          try {
+            await price.save();
+          } catch (error) {
+            return next(error);
+          }
           // Send a success response
 
           // Send a success response
@@ -85,7 +90,7 @@ const updatePrice = async (req, res, next) => {
         } else {
           //HttpError(400, `  item with id: ${id} not exist in DB`);
           res.status(400).json({
-            message: `item with id: ${id} not exist in DB`,
+            message: `item with id: ${id} not exist in lecturePrices  DB`,
           });
         }
       })();

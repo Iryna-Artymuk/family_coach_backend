@@ -6,9 +6,9 @@ import {
   updateFeedbackById,
   deleteFeedbackById,
 } from '../../controllers/feedback/index.js';
+import {isValidId, vadidateFeedback} from '../../middlewars/index.js';
 
-import vadidateFeedback from '../../middlewars/validation/feedbackBodyValidation.js';
-import isValidId from '../../middlewars/isValidId.js';
+
 
 const feedbackRouter = express.Router(); // create router
 

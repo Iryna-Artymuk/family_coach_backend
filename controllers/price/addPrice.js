@@ -5,13 +5,7 @@ import Price from '../../models/Price.js';
 const addPrice = async (req, res, next) => {
   // Get the new object from the request body
   const newPrice = req.body;
-
-  // Validate the new object will move to middlware joi validatio
-
-  if (!newPrice.category) {
-    HttpError(400, 'Invalid category');
-    return res.status(400).json({ message: 'Invalid category' });
-  }
+ 
   const price = await Price.findOne();
 
   // Find the price document to update
@@ -29,7 +23,12 @@ const addPrice = async (req, res, next) => {
         } else {
           price.adultPrices.push(newPrice);
           // Save the updated document
-          await price.save();
+          // try catch catching mongoose schema validation
+          try {
+            await price.save();
+          } catch (error) {
+            return next(error);
+          }
 
           // Send a success response
           res.status(201).json({
@@ -78,7 +77,12 @@ const addPrice = async (req, res, next) => {
         } else {
           price.lecturePrices.push(newPrice);
           // Save the updated document
-          await price.save();
+          // try catch catching mongoose schema validation
+          try {
+            await price.save();
+          } catch (error) {
+            return next(error);
+          }
 
           // Send a success response
           res.status(201).json({

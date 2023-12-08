@@ -5,9 +5,7 @@ import {
   deleteDiplomaById,
   addDiplomas,
 } from '../../controllers/qualification/index.js';
-import isValidId from '../../middlewars/isValidId.js';
-import vadidateQualificationBody from '../../middlewars/validation/qualificationBodyValidation.js';
-import upload from '../../middlewars/upload.js';
+import { isValidId, upload, vadidateQualificationBody } from '../../middlewars/index.js';
 
 const qualificationRouter = express.Router(); // create router
 
