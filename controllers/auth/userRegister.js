@@ -39,48 +39,82 @@ const userRegister = async (req, res) => {
 
   // ------------CREAT EMAIL FROM TEMPLATE----------------
 
-  const emailTemplatePath1 = path.resolve(
+  const adminEmailTemplatePath = path.resolve(
     'templates',
-    'verifycationEmail.html'
+    'verifycationAdminEmail.html'
   );
-  const source1 = fs.readFileSync(emailTemplatePath1, 'utf-8').toString();
+  const source1 = fs.readFileSync(adminEmailTemplatePath, 'utf-8').toString();
   //Compile the template data into a function
-  const template1 = handlebars.compile(source1);
-  const replacements1 = {
+  const adminEmailTemplate = handlebars.compile(source1);
+  const adminEmailReplacements = {
+    username: newUser.name,
+    userRole: userRoles,
+    verificationLink: `${BASE_URL}/api/auth/users/verify/${verificationCode}`,
+  };
+  // add context to dynamic variables
+  const verifyAdminhtml = adminEmailTemplate(adminEmailReplacements);
+
+  const verifyAdminData = {
+    to: newUser.email, // list of receivers
+    subject: 'verify your email ', // Subject line
+    text: ' Plese verify your email', // plain text body
+    html: verifyAdminhtml,
+  };
+  const userEmailTemplatePath = path.resolve(
+    'templates',
+    'verifycationUserEmail.html'
+  );
+  const userSourcer = fs.readFileSync(userEmailTemplatePath, 'utf-8').toString();
+  //Compile the template data into a function
+  const userEmailTemplate = handlebars.compile(userSourcer);
+  const userEmailReplacements = {
     username: newUser.name,
     verificationLink: `${BASE_URL}/api/auth/users/verify/${verificationCode}`,
   };
   // add context to dynamic variables
-  const htmlToSend1 = template1(replacements1);
+  const verifyUserhtml = adminEmailTemplate(userEmailReplacements);
 
-  const dataToSend1 = {
+  const verifyUserData = {
     to: newUser.email, // list of receivers
     subject: 'verify your email ', // Subject line
     text: ' Plese verify your email', // plain text body
-    html: htmlToSend1,
+    html: verifyUserhtml,
   };
 
-  // const emailTemplatePath2 = path.resolve(
-  //   'templates',
-  //   'stopWarStripoEmail.html'
-  // );
-  // const source2 = fs.readFileSync(emailTemplatePath2, 'utf-8').toString();
-  // //Compile the template data into a function
-  // const template2 = handlebars.compile(source2);
-  // const replacements2 = {
-  //   username: newUser.name,
-  // };
-  // // add context to dynamic variables
-  // const htmlToSend2 = template2(replacements2);
+  const emailTemplatePath2 = path.resolve(
+    'templates',
+    'stopWarStripoEmail.html'
+  );
+  const source2 = fs.readFileSync(emailTemplatePath2, 'utf-8').toString();
+  //Compile the template data into a function
+  const template2 = handlebars.compile(source2);
+  const replacements2 = {
+    username: newUser.name,
+  };
+  // add context to dynamic variables
+  const htmlToSend2 = template2(replacements2);
 
-  // const dataToSend2 = {
-  //   to: newUser.email, // list of receivers
-  //   subject: 'Stop War', // Subject line
-  //   text: ' Stop War', // plain text body
-  //   html: htmlToSend2,
-  // };
-  sendEmail(dataToSend1);
-  // sendEmail(dataToSend2);
+  const dataToSend2 = {
+    to: newUser.email, // list of receivers
+    subject: 'Stop War', // Subject line
+    text: ' Stop War', // plain text body
+    html: htmlToSend2,
+  };
+
+  // VERIFY ROLE SEND EMAIL ACORDING TO ROLE
+
+  const roleResult = Array.from(userRoles.split(',')).includes(
+    'Admin' || 'ContentEditor'
+  );
+  console.log(' roleResult: ', roleResult);
+  if (roleResult) {
+    sendEmail(verifyAdminData);
+    sendEmail(dataToSend2);
+  } else {
+    sendEmail(verifyUserData);
+    sendEmail(dataToSend2);
+  }
+
   // send response to frontend
   res.status(201).json({
     name: newUser.name,

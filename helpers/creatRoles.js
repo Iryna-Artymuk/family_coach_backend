@@ -30,7 +30,6 @@ const creatRoles = userRoles => {
     const [roleName, roleCode] = existRole;
 
     accumulator[roleName] = roleCode;
-    console.log('accumulator: ', accumulator);
 
     return accumulator;
   },

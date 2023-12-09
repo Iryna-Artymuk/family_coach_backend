@@ -18,12 +18,15 @@ const verifyUserEmail = async (req, res) => {
   await User.findOneAndUpdate(user._id, {
     verify: true,
     verificationCode: '',
-  });
-  // res.status(200).json({
-  //   messege: 'email verified',
-  // });
-  //res.sendfile(path.resolve('/success.html'));
+  } );
+  
 
-  res.sendFile(path.resolve('public', 'success.html'));
+  const roleResult = Object.keys(user.roles).includes('Admin' || 'ContentEditor');
+  console.log(' roleResult: ', roleResult);
+  if (roleResult) {
+    res.sendFile(path.resolve('public', 'successAdmin.html'));
+  } else {
+    res.sendFile(path.resolve('public', 'successUser.html'));
+  }
 };
 export default asyncHandler(verifyUserEmail);
