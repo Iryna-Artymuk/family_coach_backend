@@ -13,8 +13,8 @@ const config = {
   secure: true,
   // secure: 'SSL',
   auth: {
-    user: 'artimyk@ukr.net',
-    pass: EMAIL_PASSWORD
+    user: 'your_familycoach@ukr.net',
+    pass: EMAIL_PASSWORD,
   },
 };
 const transporter = nodemailer.createTransport(config);
