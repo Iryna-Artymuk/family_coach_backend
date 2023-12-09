@@ -103,9 +103,7 @@ const userRegister = async (req, res) => {
 
   // VERIFY ROLE SEND EMAIL ACORDING TO ROLE
 
-  const roleResult = Array.from(userRoles.split(',')).includes(
-    'Admin' || 'ContentEditor'
-  );
+   const roleResult = Object.values(newUser.roles).includes('101' || '101');
   console.log(' roleResult: ', roleResult);
   if (roleResult) {
     sendEmail(verifyAdminData);

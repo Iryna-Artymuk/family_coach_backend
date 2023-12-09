@@ -21,7 +21,7 @@ const verifyUserEmail = async (req, res) => {
   } );
   
 
-  const roleResult = Object.keys(user.roles).includes('Admin' || 'ContentEditor');
+  const roleResult = Object.values(user.roles).includes('101' || '101');
   console.log(' roleResult: ', roleResult);
   if (roleResult) {
     res.sendFile(path.resolve('public', 'successAdmin.html'));
