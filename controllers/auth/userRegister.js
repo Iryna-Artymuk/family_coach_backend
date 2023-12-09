@@ -72,7 +72,7 @@ const userRegister = async (req, res) => {
     verificationLink: `${BASE_URL}/api/auth/users/verify/${verificationCode}`,
   };
   // add context to dynamic variables
-  const verifyUserhtml = adminEmailTemplate(userEmailReplacements);
+  const verifyUserhtml = userEmailTemplate(userEmailReplacements);
 
   const verifyUserData = {
     to: newUser.email, // list of receivers
