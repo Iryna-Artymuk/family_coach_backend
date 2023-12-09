@@ -3,8 +3,9 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
 import asyncHandler from '../../decorators/acyncHandler.js';
-import User from '../../models/users/Users.js';
+
 import HttpError from '../../helpers/httpError.js';
+import User from '../../models/Users.js';
 
 const userLogin = async (req, res) => {
   const { email, password } = req.body;
@@ -26,16 +27,23 @@ const userLogin = async (req, res) => {
   // if password valid create token
   // 1. creat payload
   //2. create Secret
-  // 3. create token
+  // 3. create token with role
 
-  const payload = { id: user._id };
+  const roles = Object.values(user.roles);
+
+  const payload = {
+    userInfo: {
+      id: user._id,
+      roles,
+    },
+  };
   const { JWT_SECRET_KEY } = process.env;
-  const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '23h' });
+  const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '7d' });
   // update token in DB user:
 
-  await User.findByIdAndUpdate(user._id, { token, subscription: 'starter' });
+  await User.findByIdAndUpdate(user._id, { token });
 
   // sent respond
-  res.json({ token, email: user.email, subscription: 'starter' });
+  res.json({ token, email: user.email, role: roles });
 };
 export default asyncHandler(userLogin);

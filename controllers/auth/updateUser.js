@@ -1,8 +1,5 @@
-
-
-
 import asyncHandler from '../../decorators/acyncHandler.js';
-import User from '../../models/users/Users.js';
+import User from '../../models/Users.js';
 
 const updateUser = async (req, res) => {
   const { user } = req;

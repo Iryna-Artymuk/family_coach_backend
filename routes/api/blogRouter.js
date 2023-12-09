@@ -8,7 +8,14 @@ import {
   deletePostById,
   updatePostImageById,
 } from '../../controllers/blog/index.js';
-import { isValidId, upload, vadidatePostBody } from '../../middlewars/index.js';
+import {
+  authentication,
+  isValidId,
+  upload,
+  vadidatePostBody,
+  verifyRoles,
+} from '../../middlewars/index.js';
+import ROLES_LIST from '../../config/roles_list.js';
 
 const blogRouter = express.Router(); // create router
 
@@ -18,7 +25,8 @@ blogRouter.get('/:id', isValidId, getPostById);
 
 blogRouter.post(
   '/',
-  //   authentication,
+  authentication,
+  verifyRoles(ROLES_LIST.ContentEditor, ROLES_LIST.Admin),
   upload.single('postImage'),
   vadidatePostBody,
   addPost
@@ -26,7 +34,8 @@ blogRouter.post(
 
 blogRouter.put(
   '/:id',
-  //authentication,
+  authentication,
+  verifyRoles(ROLES_LIST.ContentEditor, ROLES_LIST.Admin),
   isValidId,
 
   vadidatePostBody,
@@ -34,16 +43,18 @@ blogRouter.put(
 );
 blogRouter.patch(
   '/postImage/:id',
-  //authentication,
+  authentication,
+  verifyRoles(ROLES_LIST.ContentEditor, ROLES_LIST.Admin),
   isValidId,
   upload.single('postImage'),
-  //vadidatePostBody,
+  vadidatePostBody,
   updatePostImageById
 );
 
 blogRouter.delete(
   '/:id',
-  // authentication,
+  authentication,
+  verifyRoles(ROLES_LIST.Admin),
   isValidId,
   deletePostById
 );

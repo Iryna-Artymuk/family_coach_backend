@@ -17,13 +17,14 @@ app.use(cors()); // дозволяє запити з інших адрес
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+app.use(express.static(path.resolve('public')));
 app.use(express.static(path.resolve('public', 'images')));
-// console.log(path.resolve('public', 'images'));
+
 app.use('/api/feedbacks', feedbackRouter);
 app.use('/api/blog', blogRouter);
 app.use('/api/price', priceRouter);
 app.use('/api/qualification', qualificationRouter);
-// app.use('/api/auth', authRouter);
+app.use('/api/auth', authRouter);
 
 //  обробка запиту на адресу якої не існує
 app.use((req, res) => {

@@ -22,7 +22,7 @@ const userSchema = new Schema(
       required: [true, ' where is   password'], // поле є обовязковим другий параметр кастомний меседж
       minlength: 6,
     },
-   
+    roles: {},
     avatarURL: { type: String },
     token: {
       type: String,

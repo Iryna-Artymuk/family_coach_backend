@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken';
 
-import asyncHandler from '../decorators/acyncHandler.js';
-import User from '../models/Users.js';
-import HttpError from '../helpers/httpError.js';
+import asyncHandler from '../../decorators/acyncHandler.js';
+import User from '../../models/Users.js';
+import HttpError from '../../helpers/httpError.js';
 
 const authentication = async (req, res, next) => {
   // get token from fromtend in header
@@ -19,7 +19,7 @@ const authentication = async (req, res, next) => {
   const payload = jwt.verify(token, JWT_SECRET_KEY);
   // find user in DB
 
-  const { id } = payload;
+  const { id } = payload.userInfo;
 
   if (!id) {
     return next(HttpError(401, `user with ID: ${id} not found in DB`));
@@ -33,6 +33,7 @@ const authentication = async (req, res, next) => {
   // add existuser to  request object
 
   req.user = currenttUser;
+  console.log('currenttUser: ', currenttUser);
 
   next();
 };

@@ -5,7 +5,8 @@ import handlebars from 'handlebars';
 import HttpError from '../../helpers/httpError.js';
 import asyncHandler from '../../decorators/acyncHandler.js';
 import sendEmail from '../../helpers/sendEmail.js';
-import User from '../../models/users/Users.js';
+import User from '../../models/Users.js';
+
 
 const { BASE_URL } = process.env;
 

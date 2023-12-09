@@ -8,8 +8,6 @@ const configPath = path.resolve('./', 'config', '.env');
 // console.log('configPath: ', configPath);
 dotenv.config({ path: configPath }); // додає змінні з файлу env до глобального обєкту process.env
 const connectDB = async DB_HOST => {
-
-
   try {
     const DB = await connect(DB_HOST);
     // console.log('DB : ', DB);

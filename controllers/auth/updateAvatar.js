@@ -3,7 +3,8 @@ import fs from 'fs/promises';
 import Jimp from 'jimp';
 
 import asyncHandler from '../../decorators/acyncHandler.js';
-import User from '../../models/users/Users.js';
+import User from '../../models/Users.js';
+
 
 const updateAvatar = async (req, res, next) => {
   const { user, file } = req;

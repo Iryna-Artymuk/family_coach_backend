@@ -5,14 +5,15 @@ import bcrypt from 'bcryptjs';
 import gravatar from 'gravatar';
 import { nanoid } from 'nanoid';
 
-import { HttpError, sendEmail } from '../../helpers/index.js';
+import { HttpError, creatRoles, sendEmail } from '../../helpers/index.js';
 import asyncHandler from '../../decorators/acyncHandler.js';
-import User from '../../models/users/Users.js';
+
+import User from '../../models/Users.js';
 
 const { BASE_URL } = process.env;
 const userRegister = async (req, res) => {
   // check if user already exist
-  const { email, password } = req.body;
+  const { email, password, userRoles } = req.body;
   const user = await User.findOne({ email });
 
   // if user true throw error if not make request to create user
@@ -25,12 +26,14 @@ const userRegister = async (req, res) => {
   const hashPassword = await bcrypt.hash(password, salt);
   const gravatarURL = gravatar.url(email);
   const verificationCode = nanoid();
+  const userRolesList = creatRoles(userRoles);
 
   // -------------CREAT NEW USER-----------
   const newUser = await User.create({
     ...req.body,
     password: hashPassword,
     avatarURL: gravatarURL,
+    roles: userRolesList,
     verificationCode,
   });
 
@@ -57,27 +60,27 @@ const userRegister = async (req, res) => {
     html: htmlToSend1,
   };
 
-  const emailTemplatePath2 = path.resolve(
-    'templates',
-    'stopWarStripoEmail.html'
-  );
-  const source2 = fs.readFileSync(emailTemplatePath2, 'utf-8').toString();
-  //Compile the template data into a function
-  const template2 = handlebars.compile(source2);
-  const replacements2 = {
-    username: newUser.name,
-  };
-  // add context to dynamic variables
-  const htmlToSend2 = template2(replacements2);
+  // const emailTemplatePath2 = path.resolve(
+  //   'templates',
+  //   'stopWarStripoEmail.html'
+  // );
+  // const source2 = fs.readFileSync(emailTemplatePath2, 'utf-8').toString();
+  // //Compile the template data into a function
+  // const template2 = handlebars.compile(source2);
+  // const replacements2 = {
+  //   username: newUser.name,
+  // };
+  // // add context to dynamic variables
+  // const htmlToSend2 = template2(replacements2);
 
-  const dataToSend2 = {
-    to: newUser.email, // list of receivers
-    subject: 'Stop War', // Subject line
-    text: ' Stop War', // plain text body
-    html: htmlToSend2,
-  };
+  // const dataToSend2 = {
+  //   to: newUser.email, // list of receivers
+  //   subject: 'Stop War', // Subject line
+  //   text: ' Stop War', // plain text body
+  //   html: htmlToSend2,
+  // };
   sendEmail(dataToSend1);
-  sendEmail(dataToSend2);
+  // sendEmail(dataToSend2);
   // send response to frontend
   res.status(201).json({
     name: newUser.name,

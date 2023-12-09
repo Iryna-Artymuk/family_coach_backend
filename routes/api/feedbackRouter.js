@@ -6,9 +6,13 @@ import {
   updateFeedbackById,
   deleteFeedbackById,
 } from '../../controllers/feedback/index.js';
-import {isValidId, vadidateFeedback} from '../../middlewars/index.js';
-
-
+import {
+  authentication,
+  isValidId,
+  vadidateFeedback,
+  verifyRoles,
+} from '../../middlewars/index.js';
+import ROLES_LIST from '../../config/roles_list.js';
 
 const feedbackRouter = express.Router(); // create router
 
@@ -21,11 +25,19 @@ feedbackRouter.post('/', vadidateFeedback.vadidateFeedbackBody, addFeedback);
 
 feedbackRouter.patch(
   '/:id/status',
+  authentication,
+  verifyRoles(ROLES_LIST.ContentEditor, ROLES_LIST.Admin),
   isValidId,
   vadidateFeedback.vadidateFeeedbackStatus,
   updateFeedbackById
 );
 
-feedbackRouter.delete('/:id', isValidId, deleteFeedbackById);
+feedbackRouter.delete(
+  '/:id',
+  isValidId,
+  authentication,
+  verifyRoles(ROLES_LIST.Admin),
+  deleteFeedbackById
+);
 
 export default feedbackRouter;
