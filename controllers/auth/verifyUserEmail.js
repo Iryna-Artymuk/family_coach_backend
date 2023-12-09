@@ -19,8 +19,9 @@ const verifyUserEmail = async (req, res) => {
   await User.findOneAndUpdate(user._id, {
     verify: true,
     verificationCode: '',
-  } );
-  
+  });
+
+  console.log('user.roles: ', user.roles);
 
   const roleResult = Object.values(user.roles).includes(
     ROLES_LIST.Admin || ROLES_LIST.ContentEditor

@@ -14,7 +14,7 @@ import ROLES_LIST from '../../config/roles_list.js';
 const { BASE_URL } = process.env;
 const userRegister = async (req, res) => {
   // check if user already exist
-  const { email, password, userRoles } = req.body;
+  const { email, password, userRoles = 'User' } = req.body;
   const user = await User.findOne({ email });
 
   // if user true throw error if not make request to create user
@@ -65,7 +65,9 @@ const userRegister = async (req, res) => {
     'templates',
     'verifycationUserEmail.html'
   );
-  const userSourcer = fs.readFileSync(userEmailTemplatePath, 'utf-8').toString();
+  const userSourcer = fs
+    .readFileSync(userEmailTemplatePath, 'utf-8')
+    .toString();
   //Compile the template data into a function
   const userEmailTemplate = handlebars.compile(userSourcer);
   const userEmailReplacements = {
@@ -104,7 +106,7 @@ const userRegister = async (req, res) => {
 
   // VERIFY ROLE SEND EMAIL ACORDING TO ROLE
 
-  const roleResult = Object.values(user.roles).includes(
+  const roleResult = Object.values(newUser.roles).includes(
     ROLES_LIST.Admin || ROLES_LIST.ContentEditor
   );
   console.log(' roleResult: ', roleResult);

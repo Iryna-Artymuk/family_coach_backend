@@ -17,7 +17,7 @@ const JoiRegisterUserSchema = Joi.object({
       'Frontend validation error  password should be min 6 characters..',
     'any.required': `Frontend validation error check again  if you  added   password`,
   }),
-  userRoles: Joi.string(),
+  userRoles: Joi.string().allow(''),
 });
 const validateRegisterUser = (req, res, next) => {
   const validateResult = JoiRegisterUserSchema.validate(req.body);
