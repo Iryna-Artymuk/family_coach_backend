@@ -9,6 +9,7 @@ import { HttpError, creatRoles, sendEmail } from '../../helpers/index.js';
 import asyncHandler from '../../decorators/acyncHandler.js';
 
 import User from '../../models/Users.js';
+import ROLES_LIST from '../../config/roles_list.js';
 
 const { BASE_URL } = process.env;
 const userRegister = async (req, res) => {
@@ -103,7 +104,9 @@ const userRegister = async (req, res) => {
 
   // VERIFY ROLE SEND EMAIL ACORDING TO ROLE
 
-   const roleResult = Object.values(newUser.roles).includes('101' || '101');
+  const roleResult = Object.values(user.roles).includes(
+    ROLES_LIST.Admin || ROLES_LIST.ContentEditor
+  );
   console.log(' roleResult: ', roleResult);
   if (roleResult) {
     sendEmail(verifyAdminData);

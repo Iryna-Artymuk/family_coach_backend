@@ -2,6 +2,7 @@ import path from 'path';
 import asyncHandler from '../../decorators/acyncHandler.js';
 import HttpError from '../../helpers/httpError.js';
 import User from '../../models/Users.js';
+import ROLES_LIST from '../../config/roles_list.js';
 const verifyUserEmail = async (req, res) => {
   // беремо  код верифікації  з рядка запиту і
 
@@ -21,7 +22,9 @@ const verifyUserEmail = async (req, res) => {
   } );
   
 
-  const roleResult = Object.values(user.roles).includes('101' || '101');
+  const roleResult = Object.values(user.roles).includes(
+    ROLES_LIST.Admin || ROLES_LIST.ContentEditor
+  );
   console.log(' roleResult: ', roleResult);
   if (roleResult) {
     res.sendFile(path.resolve('public', 'successAdmin.html'));
