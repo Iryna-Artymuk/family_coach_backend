@@ -13,6 +13,6 @@ export { default as vadidateQualificationBody } from './validation/qualification
 // auth
 export { default as authentication } from './auth/authentication.js';
 export { default as validateEmail } from './auth/validateEmail.js';
-export { default as validateLoginUser } from './auth/validateLoginUser.js';
+export { default as validateLogInUser } from './auth/validateLogInUser.js';
 export { default as validateRegisterUser } from './auth/validateRegisterUser.js';
 export { default as verifyRoles } from './auth/vrifyRoles.js';
