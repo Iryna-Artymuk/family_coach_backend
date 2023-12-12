@@ -3,9 +3,15 @@ import { Schema, model } from 'mongoose';
 import { handelSchemsErrorStatus } from './hooks.js';
 const qualificationSchema = new Schema(
   {
-    url: {
-      type: String,
-      required: [true, 'missing  url'], // поле є обовязковим
+    image: {
+      public_id: {
+        type: String,
+        required: [true, 'missing  url'], // поле є обовязковим
+      },
+      url: {
+        type: String,
+        required: [true, 'missing  url'], // поле є обовязковим
+      },
     },
   },
   { versionKey: false, timestamps: true }
