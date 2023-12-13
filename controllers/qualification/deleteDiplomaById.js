@@ -18,13 +18,6 @@ const deleteDiplomaById = async (req, res) => {
     );
   }
 
-  // get  avatar url to delete
-
-  const urlToDelete = result.url;
-  const oldImgtUrlPath = path.resolve('public', 'images', urlToDelete);
-  // Check if the file exists in the current directoryna and delete old avatar
-
-  await deleteOldImg(oldImgtUrlPath, urlToDelete);
   res.json({
     message: ` Diploma with id:${id} deleted successfully`,
   });

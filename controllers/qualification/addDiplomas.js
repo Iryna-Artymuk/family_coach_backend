@@ -4,16 +4,28 @@ import path from 'path';
 import fs from 'fs/promises';
 import cloudinary from '../../helpers/cloudinary.js';
 
-const addDiplomas = async (req, res) => {
+const addDiplomas = async (req, res, next) => {
   const { diplomaImg } = req.body;
   // console.log('diplomaImg : ', diplomaImg );
 
-  const uploadedResponce = await cloudinary.cloudinary.uploader.upload(
-    diplomaImg,
-    {
-      upload_preset: 'diplomas',
-    }
-  );
+  try {
+    const uploadedResponce = await cloudinary.cloudinary.uploader.upload(
+      diplomaImg,
+      {
+        upload_preset: 'diplomas',
+      }
+    );
+     const result = await Qualification.create({
+       image: {
+         public_id: uploadedResponce.public_id,
+         url: uploadedResponce.secure_url,
+       },
+     });
+
+     res.status(201).json(result);
+  } catch (error) {
+    next(error);
+  }
 
   // console.log('diplomaImg: ', diplomaImg);
 
@@ -33,13 +45,6 @@ const addDiplomas = async (req, res) => {
   // // path to file in DB it should be relating to server adress other part of path we add in app.js when allows static file
   // const diplomaURL = path.join('diplomas', filename);
 
-  const result = await Qualification.create({
-    image: {
-      public_id: uploadedResponce.public_id,
-      url: uploadedResponce.secure_url,
-    },
-  });
-
-  res.status(201).json(result);
+ 
 };
 export default asyncHandler(addDiplomas);
