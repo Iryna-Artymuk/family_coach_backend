@@ -22,8 +22,8 @@ qualificationRouter.post(
   '/',
   // authentication,
   // verifyRoles(ROLES_LIST.ContentEditor, ROLES_LIST.Admin),
-  // upload.single('diplomaImg'),
-  // vadidateQualificationBody,
+  upload.single('diplomaImg'),
+  vadidateQualificationBody,
   addDiplomas
 );
 

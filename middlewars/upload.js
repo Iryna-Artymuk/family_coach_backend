@@ -22,14 +22,14 @@ const upload = multer({
     fileSize: 1024 * 1024 * 2, //2 Mb
   },
   fileFilter: (req, file, callback) => {
-    const acceptableExtensions = ['.png', '.jpeg', '.jpg', '.JPG'];
+    const acceptableExtensions = ['.png', '.jpeg', '.jpg', 'webp'];
     if (!acceptableExtensions.includes(path.extname(file.originalname))) {
       return callback(
         HttpError(
           400,
           `${path.extname(
             file.originalname
-          )} is invalid file extention allowed  files format .png', .jpeg, .jpg,  .JPG`
+          )} is invalid file extention allowed  files format .png', .jpeg, .jpg,`
         )
       );
     }
