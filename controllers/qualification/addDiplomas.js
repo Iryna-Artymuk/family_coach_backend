@@ -6,6 +6,7 @@ import cloudinary from '../../helpers/cloudinary.js';
 
 const addDiplomas = async (req, res) => {
   const { diplomaImg } = req.body;
+  // console.log('diplomaImg : ', diplomaImg );
 
   const uploadedResponce = await cloudinary.cloudinary.uploader.upload(
     diplomaImg,
@@ -39,7 +40,6 @@ const addDiplomas = async (req, res) => {
     },
   });
 
-  console.log('result: ', result);
   res.status(201).json(result);
 };
 export default asyncHandler(addDiplomas);
