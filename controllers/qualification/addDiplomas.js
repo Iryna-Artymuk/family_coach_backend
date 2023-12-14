@@ -43,7 +43,10 @@ const addDiplomas = async (req, res, next) => {
       }
     }
 
-    res.status(201).json(result);
+    res.status(201).json({
+      status: 'success',
+      data: result,
+    });
   } catch (error) {
     next(error);
   }

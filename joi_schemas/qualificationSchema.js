@@ -2,6 +2,6 @@
 import Joi from 'joi';
 
 const qualificationSchema = Joi.object({
-  diplomaImg: Joi.any(),
+  file: Joi.any(),
 });
 export default qualificationSchema;

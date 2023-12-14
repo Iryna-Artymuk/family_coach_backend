@@ -6,6 +6,7 @@ const asyncHandler = ctrl => {
       
       // викликаємо функцію обробки помилок
       next(error);
+      console.log('error: ', error);
     }
   };
 
