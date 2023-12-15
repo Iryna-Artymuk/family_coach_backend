@@ -16,7 +16,7 @@ import ROLES_LIST from '../../config/roles_list.js';
 
 const feedbackRouter = express.Router(); // create router
 
-feedbackRouter.get('/', getAllFeedbacks);
+feedbackRouter.get('/:feedbackStatus', getAllFeedbacks);
 //router.get('/', authentication, getAllFeedbacks);
 
 feedbackRouter.get('/:id', isValidId, getFeedbackById);
