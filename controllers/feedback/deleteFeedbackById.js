@@ -14,6 +14,7 @@ const deleteFeedbackById = async (req, res) => {
   }
 
   res.json({
+    status: 'success',
     message: ` Feedback with id:${id} deleted successfully`,
   });
 };

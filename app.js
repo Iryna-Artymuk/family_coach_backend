@@ -14,8 +14,7 @@ const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short';
 
 app.use(logger(formatsLogger));
 app.use(cors()); // дозволяє запити з інших адрес
-// app.use(BodyParser.urlencoded({ extended: false }));
-// app.use(BodyParser.json());
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

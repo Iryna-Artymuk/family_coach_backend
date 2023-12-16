@@ -26,17 +26,17 @@ feedbackRouter.post('/', vadidateFeedback.vadidateFeedbackBody, addFeedback);
 feedbackRouter.patch(
   '/:id/status',
   authentication,
-  verifyRoles(ROLES_LIST.ContentEditor, ROLES_LIST.Admin),
+  // verifyRoles(ROLES_LIST.ContentEditor, ROLES_LIST.Admin),
   isValidId,
-  vadidateFeedback.vadidateFeeedbackStatus,
+  // vadidateFeedback.vadidateFeeedbackStatus,
   updateFeedbackById
 );
 
 feedbackRouter.delete(
   '/:id',
   isValidId,
-  authentication,
-  verifyRoles(ROLES_LIST.Admin),
+  // authentication,
+  // verifyRoles(ROLES_LIST.Admin),
   deleteFeedbackById
 );
 

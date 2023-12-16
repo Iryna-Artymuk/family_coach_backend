@@ -7,7 +7,6 @@ const addFeedbackSchema = Joi.object({
   feedback: Joi.string().required().messages({
     'any.required': `frontend validation error check again  if you  add feedback text`,
   }),
-
   approved: Joi.boolean(),
 });
 const feedbackStatusSchema = Joi.object({
