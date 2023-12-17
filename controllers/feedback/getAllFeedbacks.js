@@ -3,6 +3,7 @@ import Feedback from '../../models/Feedback.js';
 
 const getAllFeedbacks = async (req, res) => {
   const { feedbackStatus } = req.params;
+  console.log('req.params: ', req.params);
   console.log(' feedbackStatus : ', feedbackStatus);
   if (feedbackStatus === 'all') {
     const result = await Feedback.find({});

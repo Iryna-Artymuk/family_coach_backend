@@ -3,6 +3,7 @@ import Feedback from '../../models/Feedback.js';
 
 const getFeedbackById = async (req, res) => {
   const { id } = req.params;
+  console.log('req.params: ', req.params);
 
   const result = await Feedback.findOne({ _id: id });
 
@@ -14,7 +15,10 @@ const getFeedbackById = async (req, res) => {
     );
   }
 
-  res.json(result);
+  res.json({
+    status: 'success',
+    data: result,
+  });
 };
 
 export default asyncHandler(getFeedbackById);

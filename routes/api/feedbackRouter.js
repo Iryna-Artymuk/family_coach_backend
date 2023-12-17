@@ -19,16 +19,16 @@ const feedbackRouter = express.Router(); // create router
 feedbackRouter.get('/:feedbackStatus', getAllFeedbacks);
 //router.get('/', authentication, getAllFeedbacks);
 
-feedbackRouter.get('/:id', isValidId, getFeedbackById);
+feedbackRouter.get('/:feedbackStatus/:id', isValidId, getFeedbackById);
 
 feedbackRouter.post('/', vadidateFeedback.vadidateFeedbackBody, addFeedback);
 
 feedbackRouter.patch(
   '/:id/status',
-  authentication,
+  // authentication,
   // verifyRoles(ROLES_LIST.ContentEditor, ROLES_LIST.Admin),
   isValidId,
-  // vadidateFeedback.vadidateFeeedbackStatus,
+  vadidateFeedback.vadidateFeeedbackStatus,
   updateFeedbackById
 );
 
