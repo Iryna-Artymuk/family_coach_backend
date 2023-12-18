@@ -3,7 +3,7 @@ import Price from '../../models/Price.js';
 
 const getAllPrices = async (req, res) => {
   const result = await Price.find({});
-  res.json({ data: result });
+  res.json({ status: 'success',data: result });
 };
 
 export default asyncHandler(getAllPrices);

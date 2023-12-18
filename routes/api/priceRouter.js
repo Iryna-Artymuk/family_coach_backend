@@ -30,8 +30,8 @@ priceRouter.post(
 
 priceRouter.put(
   '/:id',
-  authentication,
-  verifyRoles(ROLES_LIST.Admin),
+  // authentication,
+  // verifyRoles(ROLES_LIST.Admin),
   isValidId,
   categoryValidation,
   priceBodyValidation,

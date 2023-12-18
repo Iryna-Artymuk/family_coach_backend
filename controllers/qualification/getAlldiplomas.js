@@ -3,7 +3,7 @@ import Qualification from '../../models/Qualification.js';
 
 const getAllDiplomas = async (req, res) => {
   const result = await Qualification.find({});
-  res.json({ quantity: result.length, data: result });
+  res.json({ status: 'success', quantity: result.length, data: result });
 };
 
 export default asyncHandler(getAllDiplomas);
