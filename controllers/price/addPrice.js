@@ -5,7 +5,7 @@ import Price from '../../models/Price.js';
 const addPrice = async (req, res, next) => {
   // Get the new object from the request body
   const newPrice = req.body;
- 
+
   const price = await Price.findOne();
 
   // Find the price document to update
@@ -17,9 +17,10 @@ const addPrice = async (req, res, next) => {
           price => price.type === newPrice.type
         );
         if (dublicate) {
-          return res
-            .status(409)
-            .json({ message: ` ${dublicate.type} already exixt in DB` });
+          return res.status(409).json({
+            status: 'error',
+            message: ` ${dublicate.type} already exixt in DB`,
+          });
         } else {
           price.adultPrices.push(newPrice);
           // Save the updated document
@@ -32,6 +33,7 @@ const addPrice = async (req, res, next) => {
 
           // Send a success response
           res.status(201).json({
+            status: 'success',
             message: `Successfully added ${newPrice.type} to adult price `,
           });
         }

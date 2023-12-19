@@ -15,7 +15,6 @@ const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short';
 app.use(logger(formatsLogger));
 app.use(cors()); // дозволяє запити з інших адрес
 
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -30,7 +29,7 @@ app.use('/api/auth', authRouter);
 
 //  обробка запиту на адресу якої не існує
 app.use((req, res) => {
-  res.status(404).json({ message: ' Page not found' });
+  res.status(404).json({ status: 'error', message: ' Page not found' });
 });
 
 app.use((err, req, res, next) => {

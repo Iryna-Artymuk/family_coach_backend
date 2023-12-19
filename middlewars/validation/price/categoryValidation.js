@@ -9,6 +9,7 @@ const categorySchema = Joi.string()
 
 const categoryValidation = (req, res, next) => {
   const { category } = req.body;
+ 
 
   if (!category) {
     next(HttpError(400, ' category validation,  missing fild category'));

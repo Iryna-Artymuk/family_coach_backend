@@ -26,13 +26,14 @@ const updatePrice = async (req, res, next) => {
           }
 
           // Send a success response
-          res.status( 200 ).json( {
-           status: 'success',
+          res.status(200).json({
+            status: 'success',
             message: ` ${priceToUpdate.type} updated successfully`,
+            data: updatePrice,
           });
         } else {
           //HttpError(400, `  item with id: ${id} not exist in DB`);
-          res.status( 400 ).json( {
+          res.status(400).json({
             status: 'error',
             message: `item with id: ${id} not exist in  adultPrices DB`,
           });
@@ -54,13 +55,13 @@ const updatePrice = async (req, res, next) => {
             return next(error);
           }
           // Send a success response
-          res.status( 200 ).json( {
-           status: 'success',
+          res.status(200).json({
+            status: 'success',
             message: ` ${priceToUpdate.type} updated successfully`,
           });
         } else {
-          res.status( 400 ).json( {
-           status: 'error',
+          res.status(400).json({
+            status: 'error',
             message: `item with id: ${id} not exist in  kidsPrices DB`,
           });
         }
@@ -88,14 +89,14 @@ const updatePrice = async (req, res, next) => {
           // Send a success response
 
           // Send a success response
-          res.status( 200 ).json( {
-             status: 'success',
+          res.status(200).json({
+            status: 'success',
             message: `Successfully updated ${priceToUpdate.type}${updatePrice.theme} `,
           });
         } else {
           //HttpError(400, `  item with id: ${id} not exist in DB`);
-          res.status( 400 ).json( {
-             status: 'error',
+          res.status(400).json({
+            status: 'error',
             message: `item with id: ${id} not exist in lecturePrices  DB`,
           });
         }

@@ -21,8 +21,8 @@ const priceRouter = express.Router(); // create router
 priceRouter.get('/', getAllPrices);
 priceRouter.post(
   '/',
-  authentication,
-  verifyRoles(ROLES_LIST.Admin),
+  // authentication,
+  // verifyRoles(ROLES_LIST.Admin),
   categoryValidation,
   priceBodyValidation,
   addPrice
@@ -40,8 +40,8 @@ priceRouter.put(
 
 priceRouter.delete(
   '/:id',
-  authentication,
-  verifyRoles(ROLES_LIST.Admin),
+  // authentication,
+  // verifyRoles(ROLES_LIST.Admin),
   isValidId,
   categoryValidation,
   deletePrice
