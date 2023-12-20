@@ -45,11 +45,13 @@ const deletePrice = async (req, res, next) => {
 
           // Send a success response
           res.status(200).json({
+            status: 'success',
             message: `  ${priceToDelete.type} delete successfully`,
           });
         } else {
           //HttpError(400, ` item with id: ${id} not exist in DB`);
           res.status(400).json({
+            status: 'error',
             message: ` item with id: ${id} not exist in DB`,
           });
         }
@@ -70,11 +72,13 @@ const deletePrice = async (req, res, next) => {
 
           // Send a success response
           res.status(200).json({
+            status: 'success',
             message: `  ${priceToDelete.theme} delete successfully`,
           });
         } else {
           // HttpError(400, `item with id: ${id} not exist in DB`);
           res.status(400).json({
+            status: 'error',
             message: `item with id: ${id} not exist in DB`,
           });
         }
