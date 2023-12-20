@@ -33,7 +33,6 @@ const addPrice = async (req, res, next) => {
 
           // Send a success response
           res.status(201).json({
-            status: 'success',
             message: `Successfully added ${newPrice.type} to adult price `,
           });
         }
@@ -46,9 +45,10 @@ const addPrice = async (req, res, next) => {
           price => price.type === newPrice.type
         );
         if (dublicate) {
-          return res
-            .status(409)
-            .json({ message: ` ${dublicate.type} already exixt in DB` });
+          return res.status(409).json({
+            status: 'error',
+            message: ` ${dublicate.type} already exixt in DB`,
+          });
         } else {
           price.kidsPrices.push(newPrice);
           // Save the updated document
@@ -60,6 +60,7 @@ const addPrice = async (req, res, next) => {
 
           // Send a success response
           res.status(201).json({
+            status: 'success',
             message: `Successfully added ${newPrice.type} to kids price `,
           });
         }
@@ -74,7 +75,8 @@ const addPrice = async (req, res, next) => {
         );
         if (dublicate) {
           return res.status(409).json({
-            message: ` ${newPrice.theme} already exixt in DB`,
+            status: 'error',
+            message: `  ${newPrice.theme} already exixt in DB`,
           });
         } else {
           price.lecturePrices.push(newPrice);
@@ -88,6 +90,7 @@ const addPrice = async (req, res, next) => {
 
           // Send a success response
           res.status(201).json({
+            status: 'success',
             message: `Successfully added ${newPrice.type}${newPrice.theme} to lecture `,
           });
         }
