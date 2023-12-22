@@ -5,8 +5,14 @@ import { handelSchemsErrorStatus } from './hooks.js';
 const blogSchema = new Schema(
   {
     postImage: {
-      type: String,
-      required: [true, ' forgot to add img '], // поле є обовязковим
+      public_id: {
+        type: String,
+        required: [true, 'missing  id'], // поле є обовязковим
+      },
+      url: {
+        type: String,
+        required: [true, 'missing  url'], // поле є обовязковим
+      },
     },
     title: {
       type: String,

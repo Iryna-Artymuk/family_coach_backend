@@ -25,8 +25,8 @@ blogRouter.get('/:id', isValidId, getPostById);
 
 blogRouter.post(
   '/',
-  authentication,
-  verifyRoles(ROLES_LIST.ContentEditor, ROLES_LIST.Admin),
+  // authentication,
+  // verifyRoles(ROLES_LIST.ContentEditor, ROLES_LIST.Admin),
   upload.single('postImage'),
   vadidatePostBody,
   addPost
@@ -53,8 +53,8 @@ blogRouter.patch(
 
 blogRouter.delete(
   '/:id',
-  authentication,
-  verifyRoles(ROLES_LIST.Admin),
+  // authentication,
+  // verifyRoles(ROLES_LIST.Admin),
   isValidId,
   deletePostById
 );

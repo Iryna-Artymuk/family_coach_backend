@@ -1,7 +1,6 @@
 import asyncHandler from '../../decorators/acyncHandler.js';
 import HttpError from '../../helpers/httpError.js';
 
-
 import path from 'path';
 
 import deleteOldImg from '../../helpers/deleteOldImg.js';
@@ -25,6 +24,7 @@ const deletePostById = async (req, res) => {
 
   await deleteOldImg(oldImgtUrlPath, urlToDelete);
   res.json({
+    status: 'success',
     message: ` Diploma with id:${id} deleted successfully`,
   });
 };

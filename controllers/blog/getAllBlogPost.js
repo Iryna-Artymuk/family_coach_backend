@@ -13,7 +13,7 @@ const getAllBlogPosts = async (req, res) => {
     limit,
   });
   // .populate( 'author' );
-  res.json({ quantity: result.length, data: result });
+  res.json({ status: 'success', quantity: result.length, data: result });
 };
 
 export default asyncHandler(getAllBlogPosts);
