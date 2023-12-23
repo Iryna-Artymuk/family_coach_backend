@@ -16,17 +16,17 @@ const blogSchema = new Schema(
     },
     title: {
       type: String,
-      required: [true, ' forgot to add img '],
+      required: [true, ' forgot to add   title '],
       maxlength: 200, // поле є обовязковим
     },
     description: {
       type: String,
-      required: [true, ' forgot to add img '],
+      required: [true, ' forgot to add  description '],
       maxlength: 500, // поле є обовязковим
     },
     post: {
       type: String,
-      required: [true, ' forgot to add img '],
+      required: [true, ' forgot to add post '],
     },
     // author: {
     //   type: Schema.Types.ObjectId,
