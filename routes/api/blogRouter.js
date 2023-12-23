@@ -7,7 +7,7 @@ import {
   updatePostById,
   deletePostById,
   updatePostImageById,
-} from '../../controllers/blog/index.js';
+} from '../../index.js';
 import {
   authentication,
   isValidId,
@@ -34,8 +34,8 @@ blogRouter.post(
 
 blogRouter.put(
   '/:id',
-  authentication,
-  verifyRoles(ROLES_LIST.ContentEditor, ROLES_LIST.Admin),
+  // authentication,
+  // verifyRoles(ROLES_LIST.ContentEditor, ROLES_LIST.Admin),
   isValidId,
 
   vadidatePostBody,
@@ -43,8 +43,8 @@ blogRouter.put(
 );
 blogRouter.patch(
   '/postImage/:id',
-  authentication,
-  verifyRoles(ROLES_LIST.ContentEditor, ROLES_LIST.Admin),
+  // authentication,
+  // verifyRoles(ROLES_LIST.ContentEditor, ROLES_LIST.Admin),
   isValidId,
   upload.single('postImage'),
   vadidatePostBody,

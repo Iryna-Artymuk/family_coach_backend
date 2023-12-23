@@ -7,7 +7,7 @@ import Blog from '../../models/Blog.js';
 
 const addPost = async (req, res, next) => {
   const { file } = req;
-  console.log('file : ', file.path);
+  
 
   try {
     const uploadedResponce = await cloudinary.cloudinary.uploader.upload(
@@ -25,7 +25,7 @@ const addPost = async (req, res, next) => {
       },
     });
     try {
-      console.log('file.path: ', file.path);
+     
       await fs.access(file.path);
 
       //return true;
