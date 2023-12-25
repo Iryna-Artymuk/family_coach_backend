@@ -18,7 +18,10 @@ const updatePostById = async (req, res, next) => {
     }
   );
 
-  res.status(200).json(result);
+  res.status(200).json({
+    status: 'success',
+    data: result,
+  });
 };
 
 export default asyncHandler(updatePostById);

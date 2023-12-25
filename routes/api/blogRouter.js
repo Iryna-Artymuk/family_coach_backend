@@ -37,7 +37,6 @@ blogRouter.put(
   // authentication,
   // verifyRoles(ROLES_LIST.ContentEditor, ROLES_LIST.Admin),
   isValidId,
-
   vadidatePostBody,
   updatePostById
 );

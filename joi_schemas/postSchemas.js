@@ -20,7 +20,7 @@ const addPostSchema = Joi.object({
     'any.required': `frontend validation error check again  if you  add description`,
   }),
 
-  category: Joi.string()
+  сategory: Joi.string()
     .valid(
       'Саморозвиток',
       'Мотивація',

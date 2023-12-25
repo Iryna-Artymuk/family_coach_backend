@@ -6,8 +6,7 @@ import feedbackRouter from './routes/api/feedbackRouter.js';
 import blogRouter from './routes/api/blogRouter.js';
 import priceRouter from './routes/api/priceRouter.js';
 import qualificationRouter from './routes/api/qualificationRouter.js';
-import authRouter from './routes/api/authRouter.js';
-// import { BodyParser } from 'body-parser';
+import authRouter from './routes/api/authRouter.js'
 const app = express();
 
 const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short';
@@ -15,7 +14,8 @@ const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short';
 app.use(logger(formatsLogger));
 app.use(cors()); // дозволяє запити з інших адрес
 
-app.use(express.json());
+// app.use( express.json() );
+app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: false }));
 
 app.use(express.static(path.resolve('public')));

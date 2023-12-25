@@ -28,8 +28,6 @@ const updatePostImageById = async (req, res, next) => {
   // path to file in DB it should be relating to server adress other part of path we add in app.js when allows static file
   const newPostURL = path.join('post images', filename);
 
-
-
   // update new  postImageURL in DB
   const result = await Blog.findByIdAndUpdate(
     id,
@@ -40,7 +38,10 @@ const updatePostImageById = async (req, res, next) => {
     }
   );
 
-  res.status(200).json({ postImage: newPostURL });
+  res.status(200).json({
+    status: 'success',
+    postImage: newPostURL,
+  });
 };
 
 export default asyncHandler(updatePostImageById);

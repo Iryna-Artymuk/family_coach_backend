@@ -29,7 +29,7 @@ const blogSchema = new Schema(
       required: [true, ' forgot to add post '],
     },
 
-    category: {
+    сategory: {
       type: String,
       enum: [
         'Саморозвиток',
