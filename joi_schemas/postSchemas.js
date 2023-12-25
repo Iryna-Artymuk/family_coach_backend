@@ -20,9 +20,18 @@ const addPostSchema = Joi.object({
     'any.required': `frontend validation error check again  if you  add description`,
   }),
 
-  category: Joi.string().valid('Сімя', 'Діти', 'Саморозвиток').messages({
-    'any.only': ` frontend validation error should be a one  of Сімя, Діти, Саморозвиток) `,
-  }),
+  category: Joi.string()
+    .valid(
+      'Саморозвиток',
+      'Мотивація',
+      'Відносини',
+      'Діти',
+      'Підлітки',
+      'Без категорії'
+    )
+    .messages({
+      'any.only': ` frontend validation error should be a one  of Саморозвиток, Мотивація, Відносини  Діти Підлітки  Без категорії) `,
+    }),
 });
 
 export default addPostSchema;
