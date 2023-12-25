@@ -7,7 +7,6 @@ import Blog from '../../models/Blog.js';
 
 const addPost = async (req, res, next) => {
   const { file } = req;
-  
 
   try {
     const uploadedResponce = await cloudinary.cloudinary.uploader.upload(

@@ -30,7 +30,7 @@ const addPostSchema = Joi.object({
       'Без категорії'
     )
     .messages({
-      'any.only': ` frontend validation error should be a one  of Саморозвиток, Мотивація, Відносини  Діти Підлітки  Без категорії) `,
+      'any.only': ` frontend validation error should be a one  of Саморозвиток, Мотивація, Відносини,Діти ,Підлітки,Без категорії) `,
     }),
 });
 

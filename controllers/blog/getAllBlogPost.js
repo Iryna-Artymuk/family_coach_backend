@@ -8,11 +8,12 @@ const getAllBlogPosts = async (req, res) => {
   // додаємо ці параметри до запиту до БД
   const skip = (page - 1) * limit; // скільки обєктів пропустити з початку бази
 
-  const result = await Blog.find({}, null, {
-    skip,
-    limit,
-  });
-  // .populate( 'author' );
+  // const result = await Blog.find({}, null, {
+  //   skip,
+  //   limit,
+  // });
+  const result = await Blog.find({});
+
   res.json({ status: 'success', quantity: result.length, data: result });
 };
 
