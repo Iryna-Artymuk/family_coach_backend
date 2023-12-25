@@ -13,7 +13,7 @@ const addPostSchema = Joi.object({
   title: Joi.string().max(50).required().messages({
     'any.required': `frontend validation error check again  if you  add title`,
   }),
-  description: Joi.string().max(100).required().messages({
+  description: Joi.string().max(300).required().messages({
     'any.required': `frontend validation error check again  if you  add description`,
   }),
   post: Joi.string().required().messages({

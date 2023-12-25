@@ -17,21 +17,18 @@ const blogSchema = new Schema(
     title: {
       type: String,
       required: [true, ' forgot to add   title '],
-      maxlength: 200, // поле є обовязковим
+      maxlength: 50, // поле є обовязковим
     },
     description: {
       type: String,
       required: [true, ' forgot to add  description '],
-      maxlength: 500, // поле є обовязковим
+      maxlength: 300, // поле є обовязковим
     },
     post: {
       type: String,
       required: [true, ' forgot to add post '],
     },
-    // author: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: 'user',
-    // },
+
     category: {
       type: String,
       enum: [
@@ -42,7 +39,7 @@ const blogSchema = new Schema(
         'Підлітки',
         'Без категорії',
       ],
-      default: 'Сімя', // значення має відповідати одному з значкнь з масиву
+      default: 'Відносини', // значення має відповідати одному з значкнь з масиву
     },
   },
   { versionKey: false, timestamps: true }
