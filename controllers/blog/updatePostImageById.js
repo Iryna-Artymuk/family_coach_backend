@@ -1,47 +1,66 @@
-import path from 'path';
 import fs from 'fs/promises';
-
+import cloudinary from '../../helpers/cloudinary.js';
 import asyncHandler from '../../decorators/acyncHandler.js';
-import deleteOldImg from '../../helpers/deleteOldImg.js';
+
 import Blog from '../../models/Blog.js';
 
 const updatePostImageById = async (req, res, next) => {
   const { file } = req;
+
   const { id } = req.params;
-  const { path: oldPath, filename } = file;
+  try {
+    // upload  new img to  cloudinary
+    const uploadedResponce = await cloudinary.cloudinary.uploader.upload(
+      file.path,
+      {
+        upload_preset: 'blog',
+      }
+    );
 
-  //DELETE OLD IMAGE
-  const { postImage: oldImgUrl } = await Blog.findOne({ _id: id });
-  const oldPostImagePath = path.resolve('public', 'images', oldImgUrl);
-  await deleteOldImg(oldPostImagePath, oldImgUrl);
+    const result = await Blog.findOne({ _id: id });
+    // delete old img from cloudinary
 
-  //SAVE NEW IMAGE
-  // path to folder where to save file permanent
-  const postImagePath = path.resolve('public', 'images', 'post images');
+    await cloudinary.cloudinary.uploader.destroy(result.postImage.public_id);
 
-  // new path including filename in public folder
-  const newPath = path.join(postImagePath, filename);
+    //update img  in DB
+    result.postImage = {
+      public_id: uploadedResponce.public_id,
+      url: uploadedResponce.secure_url,
+    };
+    result.save();
 
-  // transfer file from temp  to public folder
-  await fs.rename(oldPath, newPath);
+    // delete from temp folder
+    try {
+      await fs.access(file.path);
 
-  // path to file in DB it should be relating to server adress other part of path we add in app.js when allows static file
-  const newPostURL = path.join('post images', filename);
-
-  // update new  postImageURL in DB
-  const result = await Blog.findByIdAndUpdate(
-    id,
-    { postImage: newPostURL },
-    {
-      new: true, // повернути оновлений контакт
-      runValidators: true, // застосувати mongoose схему валідації
+      //return true;
+      fs.unlink(file.path, function (err) {
+        if (err && err.code == 'ENOENT') {
+          // file doens't exist
+          console.info("File doesn't exist, won't remove it.");
+        } else if (err) {
+          // other errors, e.g. maybe we don't have enough permission
+          console.error('Error occurred while trying to remove file');
+        } else {
+          console.info(`removed`);
+        }
+      });
+    } catch (err) {
+      if (err.code === 'ENOENT') {
+        // return false;
+        console.info(` won't  remove old avatart maybe it is not exist `);
+      } else {
+        throw err;
+      }
     }
-  );
 
-  res.status(200).json({
-    status: 'success',
-    postImage: newPostURL,
-  });
+    res.status(201).json({
+      status: 'success',
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
 export default asyncHandler(updatePostImageById);

@@ -46,7 +46,7 @@ blogRouter.patch(
   // verifyRoles(ROLES_LIST.ContentEditor, ROLES_LIST.Admin),
   isValidId,
   upload.single('postImage'),
-  vadidatePostBody,
+  // vadidatePostBody,
   updatePostImageById
 );
 
