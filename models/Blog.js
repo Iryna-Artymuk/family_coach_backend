@@ -29,17 +29,10 @@ const blogSchema = new Schema(
       required: [true, ' forgot to add post '],
     },
 
-    сategory: {
+    postCategory: {
       type: String,
-      enum: [
-        'Саморозвиток',
-        'Мотивація',
-        'Відносини',
-        'Діти',
-        'Підлітки',
-        'Без категорії',
-      ],
-      default: 'Відносини', // значення має відповідати одному з значкнь з масиву
+      required: [true, ' forgot to add   category'],
+      enum: ['Саморозвиток', 'Мотивація', 'Відносини', 'Діти', 'Підлітки'],
     },
   },
   { versionKey: false, timestamps: true }
