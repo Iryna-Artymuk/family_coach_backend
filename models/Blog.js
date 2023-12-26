@@ -32,7 +32,7 @@ const blogSchema = new Schema(
     postCategory: {
       type: String,
       required: [true, ' forgot to add   category'],
-      enum: ['Саморозвиток', 'Мотивація', 'Відносини', 'Діти', 'Підлітки'],
+      // enum: ['Саморозвиток', 'Мотивація', 'Відносини', 'Діти', 'Підлітки'],
     },
   },
   { versionKey: false, timestamps: true }
