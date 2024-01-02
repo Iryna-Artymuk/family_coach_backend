@@ -21,10 +21,10 @@ const addPostSchema = Joi.object({
   }),
 
   postCategory: Joi.string()
-    .valid('Саморозвиток', 'Мотивація', 'Відносини', 'Діти', 'Підлітки')
-    .messages({
-      'any.only': ` frontend validation error should be a one  of Саморозвиток, Мотивація, Відносини,Діти ,Підлітки,) `,
-    }),
+    // .valid('Саморозвиток', 'Мотивація', 'Відносини', 'Діти', 'Підлітки')
+    // .messages({
+    //   'any.only': ` frontend validation error should be a one  of Саморозвиток, Мотивація, Відносини,Діти ,Підлітки,) `,
+    // }),
 });
 
 export default addPostSchema;
