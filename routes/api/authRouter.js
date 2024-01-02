@@ -1,9 +1,7 @@
 import express from 'express';
 import {
-  // getCurrentUser,
-  // resendVerifyUserEmail,
-  // updateAvatar,
-  //   updateUser,
+  getCurrentUser,
+  updateUser,
   userLogin,
   userLogout,
   userRegister,
@@ -21,9 +19,8 @@ const authRouter = express.Router(); // create router
 authRouter.post('/users/register', validateRegisterUser, userRegister);
 authRouter.post('/users/login', validateLoginUser, userLogin);
 authRouter.delete('/users/logout', authentication, userLogout);
-
-// authRouter.patch('/users', authentication,  updateUser);
-// authRouter.patch('/users/password', authentication,  updateUser);
+authRouter.patch('/users', authentication, updateUser);
+authRouter.patch('/users/password', authentication, updateUser);
 
 authRouter.get('/users/current', authentication, getCurrentUser);
 

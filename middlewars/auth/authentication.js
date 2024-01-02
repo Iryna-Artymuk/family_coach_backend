@@ -33,7 +33,7 @@ const authentication = async (req, res, next) => {
   // add existuser to  request object
 
   req.user = currenttUser;
-  console.log('currenttUser: ', currenttUser);
+  // console.log('currenttUser: ', currenttUser);
 
   next();
 };
