@@ -25,8 +25,8 @@ blogRouter.get('/:id', isValidId, getPostById);
 
 blogRouter.post(
   '/',
-  // authentication,
-  // verifyRoles(ROLES_LIST.ContentEditor, ROLES_LIST.Admin),
+  authentication,
+  verifyRoles(ROLES_LIST.ContentEditor, ROLES_LIST.Admin),
   upload.single('postImage'),
   vadidatePostBody,
   addPost
@@ -34,26 +34,26 @@ blogRouter.post(
 
 blogRouter.put(
   '/:id',
-  // authentication,
-  // verifyRoles(ROLES_LIST.ContentEditor, ROLES_LIST.Admin),
+  authentication,
+  verifyRoles(ROLES_LIST.ContentEditor, ROLES_LIST.Admin),
   isValidId,
   vadidatePostBody,
   updatePostById
 );
 blogRouter.patch(
   '/postImage/:id',
-  // authentication,
-  // verifyRoles(ROLES_LIST.ContentEditor, ROLES_LIST.Admin),
+  authentication,
+  verifyRoles(ROLES_LIST.ContentEditor, ROLES_LIST.Admin),
   isValidId,
   upload.single('postImage'),
-  // vadidatePostBody,
+  vadidatePostBody,
   updatePostImageById
 );
 
 blogRouter.delete(
   '/:id',
-  // authentication,
-  // verifyRoles(ROLES_LIST.Admin),
+  authentication,
+  verifyRoles(ROLES_LIST.Admin),
   isValidId,
   deletePostById
 );
