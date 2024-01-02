@@ -17,7 +17,6 @@ import ROLES_LIST from '../../config/roles_list.js';
 const feedbackRouter = express.Router(); // create router
 
 feedbackRouter.get('/:feedbackStatus', getAllFeedbacks);
-//router.get('/', authentication, getAllFeedbacks);
 
 feedbackRouter.get('/:feedbackStatus/:id', isValidId, getFeedbackById);
 
@@ -25,8 +24,8 @@ feedbackRouter.post('/', vadidateFeedback.vadidateFeedbackBody, addFeedback);
 
 feedbackRouter.patch(
   '/:id/status',
-  // authentication,
-  // verifyRoles(ROLES_LIST.ContentEditor, ROLES_LIST.Admin),
+  authentication,
+  verifyRoles(ROLES_LIST.ContentEditor, ROLES_LIST.Admin),
   isValidId,
   vadidateFeedback.vadidateFeeedbackStatus,
   updateFeedbackById
@@ -35,8 +34,8 @@ feedbackRouter.patch(
 feedbackRouter.delete(
   '/:id',
   isValidId,
-  // authentication,
-  // verifyRoles(ROLES_LIST.Admin),
+  authentication,
+  verifyRoles(ROLES_LIST.Admin),
   deleteFeedbackById
 );
 
