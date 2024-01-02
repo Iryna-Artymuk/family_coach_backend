@@ -25,7 +25,7 @@ authRouter.delete('/users/logout', authentication, userLogout);
 // authRouter.patch('/users', authentication,  updateUser);
 // authRouter.patch('/users/password', authentication,  updateUser);
 
-// authRouter.get('/users/current', authentication, getCurrentUser);
+authRouter.get('/users/current', authentication, getCurrentUser);
 
 authRouter.get('/users/verify/:verificationCode', verifyUserEmail);
 // authRouter.post('/users/verify', validateEmail, resendVerifyUserEmail); // resent verificatin code

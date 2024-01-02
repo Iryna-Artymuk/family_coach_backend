@@ -3,6 +3,7 @@ const getCurrentUser = (req, res) => {
 
   res.json({
     name: user.name,
+    avatart: user.avatarURL,
     email: user.email,
   });
 };
