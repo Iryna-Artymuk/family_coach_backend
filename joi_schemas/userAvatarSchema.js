@@ -1,7 +1,4 @@
-import Joi from 'joi'; // бібліотека валідації
-//  ----Joi schema to check data from frontend
-// it is must match mongoose schema
-
+import Joi from 'joi';
 const userAvatarSchema = Joi.object({
   avatar: {
     filename: Joi.string().required(),

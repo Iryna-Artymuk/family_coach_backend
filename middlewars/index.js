@@ -16,4 +16,4 @@ export { default as validateEmail } from './auth/validateEmail.js';
 export { default as validateLoginUser } from './auth/validateLogInUser.js';
 export { default as validateRegisterUser } from './auth/validateRegisterUser.js';
 export { default as verifyRoles } from './auth/vrifyRoles.js';
-export { default as vadidateAvatar } from './auth/avatarValidation.js';
+export { default as vadidateAvatar } from './auth/validateAvatar.js';
