@@ -18,7 +18,7 @@ const updateUserAvatar = async (req, res, next) => {
     );
 
     const result = await User.findOne({ _id: id });
-
+   
     // delete old img from cloudinary
     if (result.avatar.public_id) {
       await cloudinary.cloudinary.uploader.destroy(result.avatar.public_id);
