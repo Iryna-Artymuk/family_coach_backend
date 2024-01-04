@@ -16,6 +16,7 @@ import {
   verifyRoles,
 } from '../../middlewars/index.js';
 import ROLES_LIST from '../../config/roles_list.js';
+import vadidatePostImage from '../../middlewars/validation/postImageValidation.js';
 
 const blogRouter = express.Router(); // create router
 
@@ -46,7 +47,6 @@ blogRouter.patch(
   verifyRoles(ROLES_LIST.ContentEditor, ROLES_LIST.Admin),
   isValidId,
   upload.single('postImage'),
-  vadidatePostImage,
   vadidatePostImage,
   updatePostImageById
 );
