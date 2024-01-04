@@ -1,4 +1,3 @@
-import { HttpError } from '../helpers/index.js';
 import Joi from 'joi'; // бібліотека валідації
 //  ----Joi schema to check data from frontend
 // it is must match mongoose schema

@@ -12,9 +12,10 @@ import {
   validateLoginUser,
   authentication,
   validateEmail,
+   vadidateAvatar,
   upload,
 } from '../../middlewars/index.js';
-import vadidateAvatar from '../../middlewars/auth/avatarValidation.js';
+
 import updateUserAvatar from '../../controllers/auth/updateUserAvatar.js';
 
 const authRouter = express.Router(); // create router
