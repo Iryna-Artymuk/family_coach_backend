@@ -3,7 +3,7 @@ import { HttpError } from '../../helpers/index.js';
 //  ----Joi schema to check data from frontend
 // it is must match mongoose schema
 
-const emailRegExpr = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+const emailRegExpr = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 const JoiLogInUserSchema = Joi.object({
   email: Joi.string().required().pattern(emailRegExpr).messages({

@@ -23,7 +23,16 @@ const userSchema = new Schema(
       minlength: 6,
     },
     roles: {},
-    avatarURL: { type: String },
+    avatar: {
+      public_id: {
+        type: String,
+        // required: [true, 'missing  id'], // поле є обовязковим
+      },
+      url: {
+        type: String,
+        required: [true, 'missing  url'], // поле є обовязковим
+      },
+    },
     token: {
       type: String,
     },

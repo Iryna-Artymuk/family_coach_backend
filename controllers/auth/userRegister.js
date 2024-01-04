@@ -33,7 +33,10 @@ const userRegister = async (req, res) => {
   const newUser = await User.create({
     ...req.body,
     password: hashPassword,
-    avatarURL: gravatarURL,
+    avatar: {
+      url: gravatarURL,
+      public_id: '',
+    },
     roles: userRolesList,
     verificationCode,
   });

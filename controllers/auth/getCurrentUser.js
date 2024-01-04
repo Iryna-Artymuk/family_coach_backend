@@ -2,8 +2,9 @@ const getCurrentUser = (req, res) => {
   const { user } = req;
 
   res.json({
+    id: user._id,
     name: user.name,
-    avatart: user.avatarURL,
+    avatar: user.avatar,
     email: user.email,
   });
 };
