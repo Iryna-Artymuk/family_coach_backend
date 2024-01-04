@@ -3,7 +3,7 @@ import Joi from 'joi'; // бібліотека валідації
 //  ----Joi schema to check data from frontend
 // it is must match mongoose schema
 
-export const userAvatarSchema = Joi.object({
+const userAvatarSchema = Joi.object({
   avatar: {
     filename: Joi.string().required(),
     path: Joi.string().required(),
