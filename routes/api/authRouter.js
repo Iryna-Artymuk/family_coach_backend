@@ -2,6 +2,8 @@ import express from 'express';
 import {
   getCurrentUser,
   updateUser,
+  updateUserPassword,
+  updateUserAvatar,
   userLogin,
   userLogout,
   userRegister,
@@ -11,12 +13,13 @@ import {
   validateRegisterUser,
   validateLoginUser,
   authentication,
-  validateEmail,
+  // validateEmail,
   vadidateAvatar,
   upload,
+
 } from '../../middlewars/index.js';
 
-import updateUserAvatar from '../../controllers/auth/updateUserAvatar.js';
+//import updateUserAvatar from '../../controllers/auth/updateUserAvatar.js';
 
 const authRouter = express.Router(); // create router
 
@@ -25,7 +28,7 @@ authRouter.post('/users/login', validateLoginUser, userLogin);
 authRouter.delete('/users/logout', authentication, userLogout);
 
 authRouter.patch('/users/:id', authentication, updateUser);
-// authRouter.patch('/users/password', authentication, updateUser);
+authRouter.patch('/users/password/:id', authentication, updateUserPassword);
 authRouter.patch(
   '/users/avatar/:id',
   authentication,

@@ -11,6 +11,7 @@ const userLogin = async (req, res) => {
   const { email, password } = req.body;
   // первіряємо чи є користувач в базі
   const user = await User.findOne({ email });
+
   if (!user) {
     throw HttpError(401, `User with  emais ${email} not found `);
   }
