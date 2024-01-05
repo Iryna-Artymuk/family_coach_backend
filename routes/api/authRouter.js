@@ -12,7 +12,7 @@ import {
   validateLoginUser,
   authentication,
   validateEmail,
-   vadidateAvatar,
+  vadidateAvatar,
   upload,
 } from '../../middlewars/index.js';
 
@@ -24,7 +24,7 @@ authRouter.post('/users/register', validateRegisterUser, userRegister);
 authRouter.post('/users/login', validateLoginUser, userLogin);
 authRouter.delete('/users/logout', authentication, userLogout);
 
-authRouter.patch('/users', authentication, updateUser);
+authRouter.patch('/users/:id', authentication, updateUser);
 // authRouter.patch('/users/password', authentication, updateUser);
 authRouter.patch(
   '/users/avatar/:id',
