@@ -6,7 +6,7 @@ const userAvatarSchema = Joi.object({
     headers: Joi.object({
       'content-disposition': Joi.string().required(),
       'content-type': Joi.string()
-        .valid('image/jpeg', 'image/jpg', 'image/png', 'image/JPG')
+        .valid('image/jpeg', 'image/jpg', 'image/png', 'image/JPG', 'image/PNG')
         .required(),
     }).unknown(),
   },
