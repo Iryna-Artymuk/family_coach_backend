@@ -24,7 +24,7 @@ authRouter.post('/users/register', validateRegisterUser, userRegister);
 authRouter.post('/users/login', validateLoginUser, userLogin);
 authRouter.delete('/users/logout', authentication, userLogout);
 
-// authRouter.patch('/users', authentication, updateUser);
+authRouter.patch('/users', authentication, updateUser);
 // authRouter.patch('/users/password', authentication, updateUser);
 authRouter.patch(
   '/users/avatar/:id',
