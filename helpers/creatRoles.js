@@ -1,9 +1,10 @@
 import ROLES_LIST from '../config/roles_list.js';
 
-const creatRoles = userRoles => {
+const creatRoles = requestedRolesArr => {
+  console.log('requestedRolesArr: ', requestedRolesArr);
   const allowedRolesArr = Object.entries(ROLES_LIST);
   // roles from frontend make arr from string
-  const requestedRolesArr = Array.from(userRoles.split(','));
+  //  const requestedRolesArr = Array.from(userRoles.split(','));
 
   // for each item from requestedRolesArr
   // if allowedRolesArr includes requested role from frontend return this role

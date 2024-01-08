@@ -1,6 +1,6 @@
 const ROLES_LIST = {
   Admin: 100,
-  ContentEditor: 101,
+ 'Content Editor': 101,
   User: 102,
 };
 

@@ -123,9 +123,10 @@ const userRegister = async (req, res) => {
 
   // send response to frontend
   res.status(201).json({
+    status: 'success',
     name: newUser.name,
     email: newUser.email,
-    avatarURL: newUser.avatarURL,
+    avatarURL: newUser.avatar.url,
   });
 };
 
